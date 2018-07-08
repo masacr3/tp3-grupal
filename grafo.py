@@ -1,5 +1,9 @@
 import random
 
+"""
+Implementación de un grafo no dirigido
+"""
+
 class Grafo:
     def __init__(self):
         self.vertices = {}
@@ -43,7 +47,7 @@ class Grafo:
 
         peso = adyacentes_origen.pop(destino)
         adyacentes_destino.pop(origen)
-        return (origen, destino, peso)
+        return peso
 
     def esta_en_grafo(self, vertice):
         return vertice in self.vertices
