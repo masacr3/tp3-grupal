@@ -29,7 +29,7 @@ class Grafo:
 
         if vertice not in self.vertices: return None
 
-        for vertices in self.verices: # itero para ver si el vertice es adyacente de algun otro vertice y lo borro
+        for vertices in self.vertices: # itero para ver si el vertice es adyacente de algun otro vertice y lo borro
             adyacentes = self.vertices[vertices]
 
             if vertice in adyacentes:
