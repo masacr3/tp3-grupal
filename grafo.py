@@ -7,29 +7,29 @@ class Grafo:
         self.es_dirigido = es_dirigido
 
     def agregar_vertice(self, vertice):
-        self.vertices[vertice] = {}
+        self.vertices[vertice] = {} # en este diccionario van a ir los adyacentes a vertice con el peso de la arista
         self.cantidad +=1
 
-    def agregar_arista(self, origen, destino, peso = 1):
+    def agregar_arista(self, vertice, adyacente, peso = 1):
 
-        if origen not in self.vertices: return False
+        if vertice not in self.vertices: return False
 
-        if not self.es_dirigido:
+        if not self.es_dirigido: # si el grafo no es dirigido hago lo sig.
 
-            if destino not in self.vertices: return False
+            if adyacente not in self.vertices: return False
 
-            adyacentes_destino = self.vertices[destino]
-            adyacentes_destino[origen] = peso
+            adyacentes_adyacente = self.vertices[adyacente]
+            adyacentes_adyacente[vertice] = peso # agrego el conjugado
 
-        adyacentes_origen = self.vertices[origen]
-        adyacentes_origen[destino] = peso
+        adyacentes_vertice = self.vertices[vertice]
+        adyacentes_vertice[adyacente] = peso # agrego el adyacente con su peso y se formo la arista
         return True
 
     def borrar_vertice(self, vertice):
 
         if vertice not in self.vertices: return None
 
-        for vertices in self.verices:
+        for vertices in self.verices: # itero para ver si el vertice es adyacente de algun otro vertice y lo borro
             adyacentes = self.vertices[vertices]
 
             if vertice in adyacentes:
@@ -38,25 +38,25 @@ class Grafo:
         self.cantidad -= 1
         return self.vertices.pop(vertice)
 
-    def borrar_arista(self, origen, destino):
+    def borrar_arista(self, vertice, adyacente):
 
-        if origen not in self.vertices: return None
+        if vertice not in self.vertices: return None
 
-        adyacentes_origen = self.vertices[origen]
+        adyacentes_vertice = self.vertices[vertice]
 
-        if destino not in adyacentes_origen: return None
+        if adyacente not in adyacentes_vertice: return None
 
-        if not self.es_dirigido:
+        if not self.es_dirigido: # si el grafo no es dirigido hago lo sig.
 
-            if destino not in self.vertices: return None
+            if adyacente not in self.vertices: return None
 
-            adyacentes_destino = self.vertices[destino]
+            adyacentes_adyacente = self.vertices[adyacente]
 
-            if origen not in adyacentes_destino: return None
+            if vertice not in adyacentes_adyacente: return None
 
-            adyacentes_destino.pop(origen)
+            adyacentes_adyacente.pop(vertice) # borro el conjugado
 
-        peso = adyacentes_origen.pop(destino)
+        peso = adyacentes_vertice.pop(adyacente) # borro el adyacente y devulevo el peso de la arista
         return peso
 
     def esta_en_grafo(self, vertice):
